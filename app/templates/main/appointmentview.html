@@ -1,0 +1,24 @@
+{% extends "menu.html" %}
+{% block header %}
+<h1>Appointment Information</h1>
+{% endblock %}
+{% block content %}
+<div class="snote">
+    {% for entry in entries %}
+    <br>
+    <ul>
+        <li>
+            <a href="#">
+                <h2><span><b>{{entry.AppointmentEntryTitle}}</b></span><br>
+</h2>
+      <p><span> {{entry.AppointmentEntryDate}}</span><br></p>
+                <p><span> {{entry.AppointmentEntryAddress}}</span><br></p>
+                <p><span> {{entry.AppointmentEntryName}}</span><br></p>
+                <p><span> {{entry.AppointmentEntryNote}}</span><br></p>
+            </a>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+
+{% endblock %}

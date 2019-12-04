@@ -1,0 +1,28 @@
+{% extends "menu.html" %}
+
+<html>
+    <head>
+        <title>{% block title %} Edit {% endblock %}</title>
+    </head>
+    <body>
+        {% block content%}
+
+        <h1 style= "color:yellowgreen;">This is the edit Appointment page for the app</h1>
+
+        {% for entry in entries %}
+        <div class="appointment-entry">
+            <form action="{{url_for('main.edit' , AppointmentEntryID = entry.AppointmentEntryID )}}" method="post">
+              <input type="text" name="newtitle" placeholder="{{entry.AppointmentEntryTitle}}">
+              <input type="text" name="newdate" placeholder="{{entry.AppointmentEntryDate}}">
+              <input type="text" name="newaddress" placeholder="{{entry.AppointmentEntryAddress}}">
+              <input type="text" name="newname" placeholder="{{entry.AppointmentEntryName}}">
+              <input type="text" name="newnote" placeholder="{{entry.AppointmentEntryNote}}">
+              <button type="submit"> Edit Updated Appointment </button>
+            </form>
+        </div>
+        {% endfor %}
+
+        {% endblock %}
+
+    </body>
+</html>

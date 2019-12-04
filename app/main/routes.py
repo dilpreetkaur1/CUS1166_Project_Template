@@ -1,9 +1,12 @@
-from flask import render_template,  redirect, url_for
-from app.main import bp
+from flask import render_template,  redirect, url_for, request
+from app.main import bp, models
 from app import db
 from app.main.forms import TaskForm
 from app.models import Task
-
+from app.main.models import *
+from .models import AppointmentEntry
+from .forms import createAEntry
+from flask import flash
 
 # Main route of the applicaitons.
 @bp.route('/', methods=['GET','POST'])
@@ -73,3 +76,50 @@ def edit_task(task_id):
     form.task_status_completed.data = current_task.task_status
 
     return render_template("main/todolist_edit_view.html",form=form, task_id = task_id)
+
+@bp.route('/appointment', methods = ['GET', 'POST'])
+def appointment():
+    form = createAEntry()
+
+    if form.validate_on_submit():
+        a = models.AppointmentEntry(AppointmentEntryTitle=form.EntryTitle.data, AffirmationEntryDate=form.EntryDate.data, AffirmationEntryAdress=form.EntryAddress.data, AffirmationEntryName=form.EntryName.data, AffirmationEntryNote=form.EntryNote.data )
+        db.session.add(a)
+        db.session.commit()
+        flash('Appointment has been created!', category='success')
+        return redirect(url_for('main.index'))
+    return render_template('appointment.html', AppointmentEntry=AppointmentEntry, form=form)
+
+@bp.route('/viewAffirmation')
+def appointmentview():
+    appointmentEntries=AppointmentEntry.query.all()
+    return render_template('appointmentview.html', entries=appointmentEntries)
+
+
+@bp.route('/edit/<int:AppointmentEntryID>', methods=['GET', 'POST', 'PUT'])
+def edit(AppointmentEntryID):
+    entry = AppointmentEntry.query.get(AppointmentEntryID)
+    entries = AppointmentEntry.query.filter_by(AppointmentEntryID=AppointmentEntryID)
+    entries = AppointmentEntry.query.all()
+    if (request.method == "POST"):
+        entry.AppointmentEntryTitle = request.form.get("newtitle")
+        entry.AppointmentEntryDate = request.form.get("newdate")
+        entry.AppointmentEntryAddress = request.form.get("newaddress")
+        entry.AppointmentEntryName= request.form.get("newname")
+        entry.AppointmentEntryNote = request.form.get("newnote")
+
+
+        return render_template('appointment.html', entries=entries)
+
+    return render_template('edit.html', entries=entries)
+
+@bp.route('/delete/<int:AppointmentEntryID>', methods=['POST', 'GET', 'DELETE'])
+def delete(AppointmentEntryID):
+
+    entry = AppointmentEntry.query.filter_by(AppointmentEntryID = AppointmentEntryID).first()
+
+    db.session.delete(entry)
+    db.session.commit()
+    entries = AppointmentEntry.query.all()
+
+    return render_template('appointment.html', entries=entries)
+    entry = AppointmentEntry.query.get(AppointmentEntryID)
