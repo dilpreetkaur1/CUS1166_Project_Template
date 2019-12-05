@@ -1,63 +1,63 @@
 {% extends "menu.html" %}
 
-{% block header %}
-<h1>Appointment</h1>
-{% endblock %}
+{% block main_content %}
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-lg-12">
+                <div class="card px-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Appointment List</h4>
+                        <form method="POST" action="{{url_for('main.appointment')}}" >
 
-{% block content %}
-<div class="container">
-<h4>Write your Appointment:</h4>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{ form.EntryTitle.label }}
-            {% if form.EntryTitle.errors %}
-                {% for e in form.EntryTitle.errors %}
-                    <p class="help-block text-danger">{{ e }}</p>
-                {% endfor %}
-            {% endif %}
-            {{ form.EntryTitle(class_='form-control') }}
+                        <div class="add-items d-flex">
+                                <!-- csrf_token is required to validate the form -->
+                                {{ form.csrf_token }}
+                                {{ form.appointment_desc(class_='form-control todo-list-input', placeholder='What Appointment do you need?')}}
+                                {{ form.appointment_status_completed }}
+                                {{ form.appointment_address(class_='form-control todo-list-input',placeholder='Address?')  }}
+                                {{ form.appointment_name(class_='form-control todo-list-input',placeholder='Customers Name?' ) }}
+                                {{ form.appointment_notes(class_='form-control todo-list-input',placeholder='Notes')  }}
+                                <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button>
+                       </div>
+                     </form>
+
+                       <!-- Show current appointments if avaiblae -->
+                        <div class="list-wrapper">
+                            <ul class="d-flex flex-column-reverse new_appointment">
+                             {% for appointment in new_appointment %}
+
+                                {% if 'done' == appointment.appointment_status%}
+                                    <li class="completed">
+                                {% else %}
+                                    <li>
+                                {% endif %}
+                                    <a href="{{url_for('main.edit_appointment',appointment_id=appointment.appointment_id)}}">
+                                         <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    <div class="form-check">
+
+                                      <label class="form-check-label">
+                                          {% if 'upcoming' == appointment.appointment_status %}
+                                            {{appointment.appointment_desc}} - <span class="badge badge-success">{{appointment.appointment_status}}</span>
+                                          {% elif 'in progress' == appointment.appointment_status %}
+                                            {{appointment.appointment_desc}} - <span class="badge badge-warning">{{appointment.appointment_status}}</span>
+                                          {% elif 'completed' == appointment.appointment_status %}
+                                             {{appointment.appointment_desc}} - <span class="badge badge-danger">{{appointment.appointment_status}}</span>
+                                          {% endif %}
+                                            <i class="input-helper"></i>
+                                      </label>
+                                    </div>
+                                    <a href="{{url_for('main.remove_appointment',appointment_id=appointment.appointment_id)}}" class="remove"><i class="fas fa-times"></i></a>
+                              </li>
+                             {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.EntryDate.label }}
-            {% if form.EntryDate.errors %}
-                {% for e in form.Date.errors %}
-                    <p class="help-block text-danger">{{ e }}</p>
-                {% endfor %}
-            {% endif %}
-            {{ form.EntryDate(class_='form-control') }}
-        </div>
-        <div class="form-group">
-            {{ form.EntryAddress.label }}
-            {% if form.EntryAddress.errors %}
-                {% for e in form.Address.errors %}
-                    <p class="help-block text-danger">{{ e }}</p>
-                {% endfor %}
-            {% endif %}
-            {{ form.EntryAddress(class_='form-control') }}
-        </div>
-        <div class="form-group">
-            {{ form.EntryName.label }}
-            {% if form.EntryName.errors %}
-                {% for e in form.Name.errors %}
-                    <p class="help-block text-danger">{{ e }}</p>
-                {% endfor %}
-            {% endif %}
-            {{ form.EntryName(class_='form-control') }}
-        </div>
-        <div class="form-group">
-            {{ form.EntryNote.label }}
-            {% if form.EntryNote.errors %}
-                {% for e in form.Note.errors %}
-                    <p class="help-block text-danger">{{ e }}</p>
-                {% endfor %}
-            {% endif %}
-            {{ form.EntryNote(class_='form-control') }}
-        </div>
-        <div class="form-group">
-            {{ form.submit(class_='btn btn-primary') }}
-        </div>
-        <a type = "button" href="{{ url_for('main.appointmentview') }}">View All Appointments</a></p>
-    </form>
+    </div>
 </div>
-{% endblock content %}
+{% endblock %}

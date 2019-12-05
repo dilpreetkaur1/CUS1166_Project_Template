@@ -1,9 +1,8 @@
 
 # import flask_wtf
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, TextAreaField
+from wtforms import StringField, SubmitField, SelectField, TextAreaField, DateField, TimeField
 from wtforms.validators import ValidationError, DataRequired, Length
-
 
 
 class TaskForm(FlaskForm):
@@ -11,19 +10,13 @@ class TaskForm(FlaskForm):
     task_status_completed = SelectField('Status', choices=[('todo','Todo'),('doing','Doing'),('done','Done')])
     submit = SubmitField('submit')
 
-class createAEntry(FlaskForm):
-    EntryTitle = StringField('Appointment Title', validators=[DataRequired()])
-    EntryDate= StringField('Appointment Date', validators=[DataRequired()])
-    EntryAddress = StringField('Appointment Address', validators=[DataRequired()])
-    EntryName= StringField('Appointment Name', validators=[DataRequired()])
-    EntryNote= StringField('Appointment Note', validators=[DataRequired()])
-    submit = SubmitField('Create')
-""" 
-class UpdateAppointmentInfo(FlaskForm):
-    title = StringField('new title', validators=[DataRequired()])
-    date = StringField('new date', validators=[DataRequired()])
-    address = StringField('new address', validators=[DataRequired()])
-    name = StringField('new name', validators=[DataRequired()])
-    note = StringField('new note', validators=[DataRequired()])
-    submit = SubmitField('Update')
-"""
+class AppointmentForm(FlaskForm):
+    appointment_desc = StringField('appointment_desc', validators=[DataRequired()])
+    appointment_status_completed = SelectField('Status', choices=[('upcoming', 'Upcoming'), ('in progress', 'In Progress'),('completed', 'Completed')])
+    appointment_title = StringField('Title',validators=[DataRequired()])
+    appointment_date = DateField('Date', validators=[DataRequired()])
+    appointment_time = TimeField('Time', validators=[DataRequired()])
+    appointment_address = StringField('Address',validators=[DataRequired()])
+    appointment_name = StringField('Name',validators=[DataRequired()])
+    appointment_notes = StringField('Notes',validators=[DataRequired()])
+    submit = SubmitField('Submit')

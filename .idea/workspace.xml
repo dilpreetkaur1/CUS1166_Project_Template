@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6d61e2d-6ee2-4b4b-8147-06d3d968ebde" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/main/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/main/appointment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/main/appointmentview.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/main/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CUS1166_Project_Template-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CUS1166_Project_Template-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/main/appointment_edit_view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/models.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/main/appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/main/appointment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/main/appointmentview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/main/edit.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/menu.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
